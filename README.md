@@ -1,5 +1,7 @@
 # Dialysis Machine Using Arduino
 
+<img src="https://www.mdpi.com/healthcare/healthcare-10-00564/article_deploy/html/images/healthcare-10-00564-g007-550.jpg"/>
+
 ## Project Description
 
 This project develops a prototype of a dialysis machine using an Arduino microcontroller. The machine automates fluid control, monitors flow rates and volumes in real-time, and provides essential information on an LCD display to simulate kidney function.
