@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flow Sensor Readings</title>
+    <style type="text/css">
+        body {
+            background-color: #F5F5F5;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .data-container {
+            display: flex;
+            justify-content: space-between;
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #FFF;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .data-item {
+            text-align: center;
+        }
+
+        .data-item h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .data-item p {
+            font-size: 48px;
+            font-weight: bold;
+            color: #6EB7FF;
+        }
+
+        .data-head {
+            width: 50%;
+            text-align: center;
+            font-size: 45px;
+            font-weight: bold;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #FFF;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="data-head">Water Flow Sensor Real-time Readings</div>
+
+<div class="data-container">
+    <div class="data-item">
+        <h2>Flow Rate</h2>
+        <p class="value" id="rate">0.00 mL/sec</p>
+    </div>
+    <div class="data-item">
+        <h2>Total Volume</h2>
+        <p class="value" id="volume">0.00 mL</p>
+    </div>
+</div>
+
+<!-- Firebase SDK scripts -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        
+        apiKey: "AIzaSyAgblajS6-f_Ld8INMoMzvFxAHOZ90D4l8",
+        authDomain: "real-time-data-8c582.firebaseapp.com",
+        databaseURL: "https://real-time-data-8c582-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "real-time-data-8c582",
+        storageBucket: "real-time-data-8c582.appspot.com",
+        messagingSenderId: "442947987420",
+        appId: "1:442947987420:web:35a346f36db80320e75119"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Reference to your database
+    const database = firebase.database();
+
+    // Reference to the data
+    const dataRef1 = database.ref('Flow_Sensor/Flow_Rate');
+    const dataRef2 = database.ref('Flow_Sensor/Volume');
+
+    // Fetch the data
+    dataRef1.on('value', function (snapshot) {
+        const rate = snapshot.val();
+        document.getElementById('rate').innerHTML = rate + " mL/sec";
+    });
+
+    dataRef2.on('value', function (snapshot) {
+        const volume = snapshot.val();
+        document.getElementById('volume').innerHTML = volume + " mL";
+    });
+</script>
+
+</body>
+</html>
